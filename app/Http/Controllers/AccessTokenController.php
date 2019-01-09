@@ -17,11 +17,11 @@ class AccessTokenController extends ATC
     {
         try {
             //get username (default is :email)
-            $username = $request->getParsedBody()['username'];
+            // $username = $request->getParsedBody()['username'];
 
             //get user
             //change to 'email' if you want
-            $user = User::where('email', '=', $username)->first();
+            // $user = User::where('email', '=', $username)->first();
 
             //generate token
             $tokenResponse = parent::issueToken($request);
@@ -38,15 +38,16 @@ class AccessTokenController extends ATC
                 return apiRes($status_oautherror1->statusMsg , $status_oautherror1->statusCode);
 
             }
-
-            //add access token to user
-            $user = collect($user);
-            $user->put('expires_in', $data['expires_in']);
-            $user->put('refresh_token', $data['refresh_token']);
-            $user->put('access_token', $data['access_token']);
-
             $status = new StatusClass(1);
-            return apiRes($status->statusMsg , $status->statusCode , array($user));
+            return apiRes($status->statusMsg , $status->statusCode , array($data));
+            //add access token to user
+            // $user = collect($user);
+            // $user->put('expires_in', $data['expires_in']);
+            // $user->put('refresh_token', $data['refresh_token']);
+            // $user->put('access_token', $data['access_token']);
+
+            // $status = new StatusClass(1);
+            // return apiRes($status->statusMsg , $status->statusCode , array($user));
         }
         catch (ModelNotFoundException $e) { // email notfound
             //return error message

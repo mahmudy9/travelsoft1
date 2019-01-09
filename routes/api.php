@@ -18,6 +18,6 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('/signup' , 'ApiAuthController@sign_up');
-Route::post('/oauth/token' , 'AccessTokenController@issueToken');
+Route::post('/login' , 'AccessTokenController@issueToken');
 Route::post('/logout' , 'ApiAuthController@logout');
 Route::get('/user-details' , 'ApiAuthController@user_details');
